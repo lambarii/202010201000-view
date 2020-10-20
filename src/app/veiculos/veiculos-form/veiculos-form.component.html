@@ -1,0 +1,79 @@
+<h1 class="mt-4">VEÍCULOS</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+<div class="form-group">
+    <form #veiculoForm="ngForm" (ngSubmit)="onSubmit()">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Veiculo Salvo com sucesso.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                    {{ erro }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Marca: *</label>
+                    <input type="text" class="form-control" [(ngModel)]="veiculo.marca" maxlength="24" name="marca" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Modelo: *</label>
+                    <input type="text" class="form-control" [(ngModel)]="veiculo.modelo" maxlength="50" name="modelo" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row"> 
+            <div class="col-md-6">
+               <!-- <div class="form-group">
+                    <label>Ano: *</label>
+                    <input type="text" class="form-control" [(ngModel)]="veiculo.ano" maxlength="4" mask="9999" name="ano" />
+                </div>  --> 
+
+                <div class="form-group">
+                    <label for="selectAno">Ano: *</label>
+                    <select type="text" class="form-control" id="selectAno" [(ngModel)]="veiculo.ano" name="ano">
+                        *ngFor="let veiculo of veiculos    
+                        <option *ngFor="let ano of listaAnos">{{ ano }}</option>
+                    </select>    
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Valor: *</label>
+                    <input type="text" class="form-control" [(ngModel)]="veiculo.valor" name="valor" currencyMask
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" min="300.00" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" *ngIf="veiculo.id">
+                <div class="form-group">
+                    <label>ID Gerado:</label>
+                    <input type="text" [ngModel]="veiculo.id" name="id" class="form-control" disabled=true />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success" >
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+                <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
+                    <i class="fas fa-chevron-circle-left"></i> Voltar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,61 @@
+<h1 class="mt-4">VEÍCULOS</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Consulta</li>
+</ol>
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-warning" (click) ="novoCadastro()">
+                <i class="fa fa-plus"></i> Novo
+            </button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 table-responsive-sm">
+            <div class="form-group col-md-3">
+                <strong>Classificação de Risco: </strong>
+                <br/><br/>
+                <select class="form-control" [(ngModel)]="classificacao">
+                  <option></option>      
+                  <option value="RISCO BAIXO">Risco Baixo</option>
+                  <option value="RISCO MÉDIO">Risco Médio</option>
+                  <option value="RISCO ALTO">Risco Alto</option>
+                </select>
+            </div>  
+            <br/>
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Valor</th>
+                        <th>Ano</th>
+                        <th>Classificação de Risco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let veiculo of veiculos | tableFilter: classificacao"> 
+                        <td>{{ veiculo.id }}</td>
+                        <td>{{ veiculo.marca }}</td>
+                        <td>{{ veiculo.modelo }}</td>
+                        <td>R$ {{ veiculo.valor }}</td>
+                        <td>{{ veiculo.ano }}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" *ngIf="veiculo.classificacao == 'RISCO BAIXO'">
+                                {{ veiculo.classificacao }}
+                            </button>
+                            <button type="button" class="btn btn-warning" *ngIf="veiculo.classificacao == 'RISCO MÉDIO'">
+                                {{ veiculo.classificacao }}
+                            </button>
+                            <button type="button" class="btn btn-danger" *ngIf="veiculo.classificacao == 'RISCO ALTO'">
+                                {{ veiculo.classificacao }}
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>            
+        </div>
+    </div>
+</div>
